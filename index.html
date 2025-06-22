@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Philippine BPO Industry: A Global Leader in Digital Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .color-dark-blue { color: #004AAD; }
+        .bg-dark-blue { background-color: #004AAD; }
+        .border-dark-blue { border-color: #004AAD; }
+
+        .color-medium-blue { color: #0077B6; }
+        .bg-medium-blue { background-color: #0077B6; }
+
+        .color-light-blue { color: #90E0EF; }
+        .bg-light-blue { background-color: #90E0EF; }
+
+        .color-very-light-blue { color: #CAF0F8; }
+        .bg-very-light-blue { background-color: #CAF0F8; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0077B6;
+            border: 4px solid #CAF0F8;
+        }
+        .flowchart-node {
+            border: 2px solid #0077B6;
+            background-color: #CAF0F8;
+            color: #004AAD;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flowchart-connector {
+            width: 2px;
+            background-color: #0077B6;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#004AAD] mb-2">Philippine BPO: Powering the Global Digital Economy</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">A data-driven look into the industry's robust performance, strategic evolution, and future trajectory as a premier outsourcing destination.</p>
+            <p class="text-md text-gray-500 max-w-4xl mx-auto mt-4">All monetary values are expressed in US Dollars (USD).</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8 flex flex-col md:flex-row items-center justify-around space-y-8 md:space-y-0 md:space-x-8">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-[#004AAD] mb-2">2024 Revenue</h2>
+                    <p class="text-6xl font-extrabold text-[#0077B6]">$38B (USD)</p>
+                    <p class="text-md text-gray-500 mt-2">A 7% increase from 2023, doubling the global average growth rate.</p>
+                </div>
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-[#004AAD] mb-2">2024 Employment</h2>
+                    <p class="text-6xl font-extrabold text-[#0077B6]">1.82M</p>
+                    <p class="text-md text-gray-500 mt-2">120,000 new full-time jobs created in the past year.</p>
+                </div>
+                <div class="w-full max-w-xs md:max-w-sm text-center">
+                    <h3 class="text-xl font-bold text-[#004AAD] mb-3">Contribution to National GDP (2024)</h3>
+                    <div class="chart-container h-64 md:h-72">
+                         <canvas id="gdpContributionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] mb-2">Revenue Growth Trajectory</h2>
+                <p class="text-gray-600 mb-6">The Philippine BPO industry consistently outperforms global benchmarks. Revenue is projected to reach $40 billion in 2025, with an ambitious target of $59 billion by 2028, showcasing sustained investor confidence and market demand.</p>
+                <div class="chart-container">
+                    <canvas id="revenueGrowthChart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] mb-2">Employment Expansion</h2>
+                <p class="text-gray-600 mb-6">The sector is a major job creator, with employment expected to hit 1.9 million in 2025. The IBPAP roadmap aims for an aggressive target of 2.5 million jobs by 2028, reinforcing its role as a key pillar of the national workforce.</p>
+                <div class="chart-container">
+                    <canvas id="employmentGrowthChart"></canvas>
+                </div>
+            </section>
+
+            <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-4">Strategic Shift: From BPO to KPO</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">The industry is evolving beyond traditional call centers, moving up the value chain into Knowledge Process Outsourcing (KPO). This strategic pivot leverages the Philippines' highly skilled talent pool for more complex, specialized services that global clients demand.</p>
+                <div class="chart-container" style="height: 400px; max-height: 500px;">
+                    <canvas id="serviceSegmentsChart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] mb-2">Enduring Competitive Advantages</h2>
+                <p class="text-gray-600 mb-6">The Philippines maintains its global leadership through a unique combination of talent, cost-effectiveness, and a supportive ecosystem. These core strengths make it a resilient and attractive destination for outsourcing.</p>
+                <div class="chart-container">
+                    <canvas id="competitiveAdvantageChart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                 <h2 class="text-3xl font-bold text-[#004AAD] mb-4">Adapting to AI: Job Transformation</h2>
+                <p class="text-gray-600 mb-6">Instead of displacing jobs, AI is transforming them. The industry is focused on upskilling its workforce to collaborate with AI, handling more complex tasks and creating new, higher-value roles. This chart visualizes the expected impact on job roles.</p>
+                 <div class="chart-container">
+                    <canvas id="aiImpactChart"></canvas>
+                </div>
+            </section>
+
+            <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-4">Philippine MSMEs: The Backbone of the Economy (2023 Data)</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Micro, Small, and Medium Enterprises (MSMEs) form the vast majority of business establishments in the Philippines, playing a crucial role in job creation and economic activity across various local government units (LGUs).</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-2xl font-bold text-[#004AAD] mb-4 text-center">MSME Distribution by Enterprise Size</h3>
+                        <p class="text-gray-600 mb-4 text-center">Of the 1.25 million business establishments in 2023, 99.63% were MSMEs, with micro enterprises making up the largest share.</p>
+                        <div class="chart-container h-64 md:h-72">
+                            <canvas id="msmeDistributionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-2xl font-bold text-[#004AAD] mb-4 text-center">Employment Generated by MSMEs (2023)</h3>
+                        <p class="text-gray-600 mb-4 text-center">MSMEs are the primary job creators, contributing over two-thirds of the country's total employment.</p>
+                        <div class="chart-container h-64 md:h-72">
+                            <canvas id="msmeEmploymentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-4">Philippine BPO Enterprise Profiles: Estimated Scale & Operations</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">While specific company financial data is confidential, here are estimated profiles for BPO enterprises by size, reflecting typical operational scales and investment needs in the Philippines. These figures are illustrative and based on general industry benchmarks.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left table-auto">
+                        <thead>
+                            <tr class="bg-medium-blue text-white rounded-t-lg">
+                                <th class="px-4 py-3 rounded-tl-lg">Category</th>
+                                <th class="px-4 py-3">Typical Manpower (FTEs)</th>
+                                <th class="px-4 py-3">Service Focus</th>
+                                <th class="px-4 py-3">Est. Annual Revenue (USD)</th>
+                                <th class="px-4 py-3">Est. Annual OPEX (USD)</th>
+                                <th class="px-4 py-3 rounded-tr-lg">Est. Initial CAPEX (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b border-gray-200">
+                                <td class="px-4 py-3 font-semibold text-dark-blue">Micro BPO</td>
+                                <td class="px-4 py-3">1 - 9</td>
+                                <td class="px-4 py-3">Niche, Virtual Assistant, Small Customer Support, Freelance</td>
+                                <td class="px-4 py-3">$20,000 - $200,000</td>
+                                <td class="px-4 py-3">$15,000 - $150,000</td>
+                                <td class="px-4 py-3">$5,000 - $30,000</td>
+                            </tr>
+                            <tr class="bg-very-light-blue border-b border-gray-200">
+                                <td class="px-4 py-3 font-semibold text-dark-blue">Small BPO</td>
+                                <td class="px-4 py-3">10 - 99</td>
+                                <td class="px-4 py-3">General Customer Service, Back-Office, Data Entry, Basic Tech Support, some KPO</td>
+                                <td class="px-4 py-3">$200,000 - $2,000,000</td>
+                                <td class="px-4 py-3">$150,000 - $1,500,000</td>
+                                <td class="px-4 py-3">$30,000 - $200,000</td>
+                            </tr>
+                            <tr class="bg-white border-b border-gray-200">
+                                <td class="px-4 py-3 font-semibold text-dark-blue">Medium BPO</td>
+                                <td class="px-4 py-3">100 - 199</td>
+                                <td class="px-4 py-3">Multi-Process BPO, Mid-Level KPO, F&A, HIM, Complex Customer Support</td>
+                                <td class="px-4 py-3">$2,000,000 - $10,000,000</td>
+                                <td class="px-4 py-3">$1,500,000 - $7,000,000</td>
+                                <td class="px-4 py-3">$200,000 - $1,000,000</td>
+                            </tr>
+                            <tr class="bg-very-light-blue">
+                                <td class="px-4 py-3 font-semibold text-dark-blue rounded-bl-lg">Large BPO</td>
+                                <td class="px-4 py-3">200+</td>
+                                <td class="px-4 py-3">Full-Suite BPO, Complex KPO, GCCs, AI/ML Dev Support, Cybersecurity Ops</td>
+                                <td class="px-4 py-3">$10,000,000+</td>
+                                <td class="px-4 py-3">$7,000,000+</td>
+                                <td class="px-4 py-3 rounded-br-lg">$1,000,000+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+             <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#004AAD] mb-4">IBPAP Industry Roadmap 2028</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">A clear strategic vision guides the industry's future. The roadmap outlines key phases of development, from building foundational strengths to achieving global leadership in high-value digital services.</p>
+                <div class="relative pl-10 border-l-4 border-[#90E0EF]">
+                    <div class="mb-10 ml-4 relative timeline-item">
+                        <h3 class="text-xl font-bold text-[#004AAD]">Phase 1: Strengthening the Core (2023-2024)</h3>
+                        <p class="text-gray-600">Focus on solidifying existing services, enhancing workforce skills through upskilling programs, and leveraging government support like the CREATE MORE Act to boost competitiveness.</p>
+                    </div>
+                    <div class="mb-10 ml-4 relative timeline-item">
+                        <h3 class="text-xl font-bold text-[#004AAD]">Phase 2: Accelerating Growth (2025-2026)</h3>
+                        <p class="text-gray-600">Driving expansion into higher-value KPO services, increasing adoption of AI and automation, and promoting geographic diversification into countryside locations to tap new talent pools.</p>
+                    </div>
+                    <div class="mb-10 ml-4 relative timeline-item">
+                        <h3 class="text-xl font-bold text-[#004AAD]">Phase 3: Achieving Global Leadership (2027-2028)</h3>
+                        <p class="text-gray-600">Aiming to capture a larger share of the global KPO market, establishing the Philippines as a hub for innovation and attracting more Global Capability Centers (GCCs) for strategic functions.</p>
+                    </div>
+                    <div class="ml-4 relative timeline-item">
+                        <h3 class="text-xl font-bold text-[#004AAD]">The Goal: $59 Billion Revenue & 2.5 Million Jobs</h3>
+                        <p class="text-gray-600">The roadmap culminates in ambitious targets that will solidify the Philippines' status as a premier digital services hub on the world stage.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 text-gray-500 text-sm">
+            <p>&copy; 2025 Digital Services Market Insights. All rights reserved.</p>
+            <p class="mt-1">This infographic is based on data from the Market Study Report on the Philippine BPO Industry, with MSME data sourced from the Philippine Statistics Authority (PSA) 2023 List of Establishments.</p>
+        </footer>
+
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const brilliantBlues = {
+        dark: '#004AAD',
+        medium: '#0077B6',
+        light: '#90E0EF',
+        veryLight: '#CAF0F8',
+        text: '#374151',
+        grid: '#E5E7EB'
+    };
+
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+            return label.join(' ');
+        }
+        return label;
+    };
+
+    function wrapLabel(str, maxWidth) {
+        if (!str) return '';
+        if (str.length <= maxWidth) {
+            return str;
+        }
+        const words = str.split(' ');
+        let lines = [];
+        let currentLine = '';
+        words.forEach(word => {
+            if ((currentLine + ' ' + word).trim().length > maxWidth && currentLine.length > 0) {
+                lines.push(currentLine);
+                currentLine = word;
+            } else {
+                currentLine = (currentLine + ' ' + word).trim();
+            }
+        });
+        if (currentLine.length > 0) {
+            lines.push(currentLine);
+        }
+        return lines;
+    }
+
+    const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: brilliantBlues.text,
+                    font: { family: "'Inter', sans-serif", size: 14 }
+                }
+            },
+            tooltip: {
+                enabled: true,
+                callbacks: { title: tooltipTitleCallback }
+            }
+        },
+        scales: {
+            y: {
+                ticks: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" } },
+                grid: { color: brilliantBlues.grid }
+            },
+            x: {
+                ticks: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" } },
+                grid: { display: false }
+            }
+        }
+    };
+
+    new Chart(document.getElementById('gdpContributionChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+            labels: ['BPO Industry', 'Other Sectors'],
+            datasets: [{
+                data: [9, 91],
+                backgroundColor: [brilliantBlues.medium, brilliantBlues.light],
+                borderColor: ['#FFFFFF'],
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" } } },
+                tooltip: { callbacks: { title: tooltipTitleCallback } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('revenueGrowthChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['2023', '2024', '2025 (P)', '2028 (T)'],
+            datasets: [{
+                label: 'Revenue (in Billion USD)',
+                data: [35.5, 38.0, 40.0, 59.0],
+                borderColor: brilliantBlues.dark,
+                backgroundColor: brilliantBlues.dark + '33',
+                fill: true,
+                tension: 0.1
+            }]
+        },
+        options: { ...commonChartOptions,
+            scales: { ...commonChartOptions.scales, y: { ticks: { callback: (val) => `$${val}B (USD)` } } }
+        }
+    });
+
+    new Chart(document.getElementById('employmentGrowthChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: ['2023', '2024', '2025 (P)', '2028 (T)'],
+            datasets: [{
+                label: 'Employment (in Million FTEs)',
+                data: [1.7, 1.82, 1.9, 2.5],
+                backgroundColor: brilliantBlues.medium,
+                borderRadius: 5
+            }]
+        },
+        options: { ...commonChartOptions,
+            plugins: { ...commonChartOptions.plugins, legend: { display: false } },
+            scales: { ...commonChartOptions.scales, y: { ticks: { callback: (val) => `${val}M` } } }
+        }
+    });
+
+    const serviceSegmentsLabels = [
+        wrapLabel('AI & Data Analytics', 16),
+        wrapLabel('Cybersecurity', 16),
+        wrapLabel('Healthcare Information Mgmt', 16),
+        wrapLabel('Finance & Accounting', 16),
+        wrapLabel('IT Outsourcing', 16),
+        wrapLabel('HR BPO', 16)
+    ];
+
+    new Chart(document.getElementById('serviceSegmentsChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: serviceSegmentsLabels,
+            datasets: [{
+                label: 'Current Prominence',
+                data: [70, 75, 80, 85, 95, 65],
+                backgroundColor: brilliantBlues.dark,
+                stack: 'Stack 0',
+            }, {
+                label: 'Growth Potential',
+                data: [95, 90, 85, 75, 70, 80],
+                backgroundColor: brilliantBlues.light,
+                stack: 'Stack 0',
+            }]
+        },
+        options: {
+            ...commonChartOptions,
+            indexAxis: 'y',
+            scales: {
+                x: { stacked: true, ticks: { display: false }, grid: { display: false } },
+                y: { stacked: true, grid: { display: false } }
+            },
+            plugins: {
+                ...commonChartOptions.plugins,
+                legend: { position: 'bottom' },
+                tooltip: { callbacks: { title: tooltipTitleCallback } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('competitiveAdvantageChart').getContext('2d'), {
+        type: 'radar',
+        data: {
+            labels: [wrapLabel('Cost Effectiveness', 16), 'Skilled Workforce', 'Cultural Compatibility', 'Govt. Support', 'Resilience'],
+            datasets: [{
+                label: 'Philippines Competitive Score (out of 10)',
+                data: [8, 9, 10, 9, 8],
+                borderColor: brilliantBlues.dark,
+                backgroundColor: brilliantBlues.dark + '40',
+                pointBackgroundColor: brilliantBlues.dark,
+                pointBorderColor: '#fff',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                 legend: { display: false },
+                 tooltip: { callbacks: { title: tooltipTitleCallback } }
+            },
+            scales: {
+                r: {
+                    angleLines: { color: brilliantBlues.grid },
+                    grid: { color: brilliantBlues.grid },
+                    pointLabels: { color: brilliantBlues.text, font: { size: 12, family: "'Inter', sans-serif" }},
+                    ticks: { backdropColor: 'rgba(255, 255, 255, 0.75)', color: brilliantBlues.text, stepSize: 2 }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('aiImpactChart').getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: [
+                wrapLabel('New Higher-Value Roles Created', 20),
+                wrapLabel('Existing Roles Upskilled with AI', 20),
+                wrapLabel('Routine Tasks Automated', 20)
+            ],
+            datasets: [{
+                label: 'Impact of AI on Jobs',
+                data: [35, 50, 15],
+                backgroundColor: [brilliantBlues.dark, brilliantBlues.medium, brilliantBlues.light],
+                borderColor: '#FFFFFF',
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" }, boxWidth: 20 }},
+                tooltip: { callbacks: { title: tooltipTitleCallback } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('msmeDistributionChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Micro Enterprises (90.43%)', 'Small Enterprises (8.82%)', 'Medium Enterprises (0.38%)', 'Large Enterprises (0.37%)'],
+            datasets: [{
+                data: [90.43, 8.82, 0.38, 0.37],
+                backgroundColor: [brilliantBlues.dark, brilliantBlues.medium, brilliantBlues.light, '#A0AEC0'],
+                borderColor: ['#FFFFFF'],
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" } } },
+                tooltip: { callbacks: { title: tooltipTitleCallback } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('msmeEmploymentChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: ['Micro', 'Small', 'Medium', 'Large'],
+            datasets: [{
+                label: 'Share of Total Employment (%)',
+                data: [33.95, 26.26, 6.77, 33.03],
+                backgroundColor: [brilliantBlues.dark, brilliantBlues.medium, brilliantBlues.light, '#A0AEC0'],
+                borderRadius: 5
+            }]
+        },
+        options: { ...commonChartOptions,
+            plugins: { ...commonChartOptions.plugins, legend: { display: false } },
+            scales: { ...commonChartOptions.scales, y: { ticks: { callback: (val) => `${val}%` } } }
+        }
+    });
+
+});
+</script>
+</body>
+</html>
